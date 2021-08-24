@@ -8,7 +8,6 @@ class HomeController extends Controller {
     const { ctx } = this;
     const q = ctx.query;
     const signature = q.signature;
-    console.log(q);
     const token = 'firefly';
     const echostr = q.echostr;
     const timestamp = q.timestamp;
@@ -17,7 +16,6 @@ class HomeController extends Controller {
     const array = new Array(token, timestamp, nonce);
     array.sort();
     const _signature = crypto.createHash('sha1').update(array.toString().replace(/,/g, ''), 'utf-8').digest('hex');
-    console.log(_signature);
     if (_signature === signature) {
       ctx.body = `${echostr}`;
     // eslint-disable-next-line keyword-spacing
